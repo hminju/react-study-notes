@@ -1,2 +1,1 @@
-# react-study-notes
 React 공부 내용을 정리한 문서와 예제 코드 모음
