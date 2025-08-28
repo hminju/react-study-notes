@@ -1,11 +1,11 @@
 # 01. React Basics
 
-- [JSX](./jsx.md)
-- [컴포넌트](./component.md)
-- [Props](./props.md)
-- [State](./state.md)
-- [이벤트 처리](./event-handling.md)
-- [조건부/리스트 렌더링](./rendering.md)
+- [JSX](./jsx.md)   JSX 기본 문법 + Babel 변환 예시
+- [컴포넌트](./component.md) 함수형 vs 클래스형 컴포넌트 간단 비교.
+- [Props](./props.md) props 기본 전달, 구조분해, defaultProps.
+- [State](./state.md) useState 사용법, 상태 업데이트 규칙.
+- [이벤트 처리](./event-handling.md) onClick, onChange 예시, synthetic event 특징.
+- [조건부/리스트 렌더링](./rendering.md) 조건부 렌더링 (&&, 삼항연산자), 리스트 렌더링, key 중요성.
 
 ## 0. React
 
@@ -27,4 +27,5 @@
 4. 단방향 데이터 흐름
    - 데이터는 부모->자식으로 흘러간다.(props)
    - 앱의 상태 관리가 직관적이고 예측 가능
+
 
