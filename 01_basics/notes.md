@@ -1,6 +1,5 @@
 # 01. React Basics
 
-- [React 소개](./react-intro.md)
 - [JSX](./jsx.md)
 - [컴포넌트](./component.md)
 - [Props](./props.md)
@@ -28,3 +27,4 @@
 4. 단방향 데이터 흐름
    - 데이터는 부모->자식으로 흘러간다.(props)
    - 앱의 상태 관리가 직관적이고 예측 가능
+
