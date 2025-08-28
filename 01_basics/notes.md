@@ -1,5 +1,13 @@
 # 01. React Basics
 
+- [React 소개](./react-intro.md)
+- [JSX](./jsx.md)
+- [컴포넌트](./component.md)
+- [Props](./props.md)
+- [State](./state.md)
+- [이벤트 처리](./event-handling.md)
+- [조건부/리스트 렌더링](./rendering.md)
+
 ## 0. React
 
 ### React 이름
@@ -20,40 +28,3 @@
 4. 단방향 데이터 흐름
    - 데이터는 부모->자식으로 흘러간다.(props)
    - 앱의 상태 관리가 직관적이고 예측 가능
-
-
-## 1. JSX (JavaScript XML)
-
-- React에서 UI를 표현하는 문법.
-- JavaScript 안에서 HTML처럼 작성 가능.
-- 실제로는 `React.createElement`로 변환됨.
-
-## 2. 컴포넌트
-
-- 설명 …
-- 예제 코드: `example/Greeting.jsx`
-
-## 3. Props
-
-- 설명 …
-- 예제 코드: `example/Greeting.jsx`
-
-## 4. State
-
-- 설명 …
-- 예제 코드: `example/Counter.jsx`
-
-## 5. 이벤트 처리
-
-- 설명 …
-- 예제 코드: `example/Toggle.jsx`
-
-## 6. 조건부 렌더링
-
-- 설명 …
-- 예제 코드: `example/Conditional.jsx`
-
-## 7. 리스트 렌더링 & key
-
-- 설명 …
-- 예제 코드: `example/ListRendering.jsx`
