@@ -5,8 +5,9 @@ React 공부 내용을 정리한 문서와 예제 코드 모음
 ├── README.md               # 레포 소개 및 목차
 ├── 01_basics/              # 기본 개념 (JSX, 컴포넌트, props, state 등)
 │   ├── notes.md
-│   └── example/
-│       └── Counter.jsx
+│   └── dom.md
+│   └── jsx.md
+│       
 ├── 02_hooks/               # Hooks 정리 (useState, useEffect, etc.)
 │   ├── notes.md
 │   └── example/
