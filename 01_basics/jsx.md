@@ -2,7 +2,7 @@
 
 ### 1. JSX란?
 JSX(JavaScript XML) : js안에서 HTML 같은 문법을 쓸 수 있게 해주는 React의 문법 확장<br/>
-: 사실 브라우저는 JSX를 직접 이해하지 못함. 그래서 Babel 같은 트랜스파일러가 JSX를 순서 JavaScript로 변환해줌
+: 사실 브라우저는 JSX를 직접 이해하지 못함. 그래서 Babel 같은 트랜스파일러가 JSX를 순수 JavaScript로 변환해줌
 
 ### 1.1 JSX가 왜 필요한가?
 처음 React를 접하면 JSX는 그냥 "HTML 같은 문법"으로 보이지만, 사실은 **UI를 JavaScript 안에서 표현하기 위한 도구**<br/>
@@ -10,11 +10,11 @@ JSX(JavaScript XML) : js안에서 HTML 같은 문법을 쓸 수 있게 해주는
 React는 "UI = 상태의 함수" 라는 철학을 따른다. 즉 **상태(state)** 가 바뀌면 UI도 자동으로 다시 그려져야 한다.<br/>
 그런데 JS로만 UI를 표현하면 너무 장황해진다.
 
-```
+```js
 const element = React.createElement("h1", null, "Hello, world!");
 ```
 이걸 더 사람 친화적인 문법으로 만든 게 JSX
-```
+```jsx
 const element = <h1>Hello, world!</h1>;
 ```
 
@@ -36,7 +36,7 @@ const element = <h1>Hello, world!</h1>;
 ---
 
 ### 3.기본문법과 변환
-**(1) HTML처럼 보이지만 JS임**
+#### (1) HTML처럼 보이지만 JS임
 ```
 const element = <h1>Hello, world!</h1>;
 ```
@@ -47,7 +47,7 @@ const element = React.createElement("h1", null, "Hello, world!");
 ```
 <br/>
 
-**(2) 중괄호 {}안에 JS 표현식 가능**
+#### (2) 중괄호 {}안에 JS 표현식 가능
 
 ```jsx
 const name = "mj";
@@ -56,12 +56,12 @@ const element = <h1>Hello, {name}!</h1>;
 
 Babel 변환후:
 
-```jsx
+```js
 const element = React.createElement("h1", null, `Hello, ${name}!`);
 ```
 <br/>
 
-**(3) 속성 표기법**
+#### (3) 속성 표기법
 
 - 문자열은 큰따옴표 ""
 - JS 값은 중괄호 {}
@@ -72,7 +72,7 @@ const element2 = <button disabled={true}>Click</button>;
   
 <br/>
 
-**(4) 반드시 하나의 부모 요소로 감싸야 함**
+#### (4) 반드시 하나의 부모 요소로 감싸야 함
 
 ```
 // ❌ 오류
