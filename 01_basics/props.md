@@ -1,6 +1,4 @@
 ## Props
-**
-<br>
 
 ### 1. Props 기본 전달
 Props는 HTML의 속성과 비슷<br>
