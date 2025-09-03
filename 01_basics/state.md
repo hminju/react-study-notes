@@ -29,4 +29,53 @@ function Counter() {
 
 ### 2. 상태 업데이트 규칙
 #### 1. 상태는 불변성을 지켜야 한다.
+배열이나 객체 같은 복잡한 데이터를 업데이트할 때는 기존 상태를 직접 변경하면 안됨. **항상 새로운 배열이나 객체를 만들어서** 업데이트해야 리액트가 변경을 감지
 
+**잘못된 예**
+```js
+// 기존 배열을 직접 수정
+const [items, setItems] = useState(['사과']);
+const addItem = () => {
+  items.push('바나나'); // 직접 변경
+  setItems(items);
+};
+```
+
+**올바른 예**
+```js
+// 전개 연산자(...)를 이용해 새로운 배열 생성
+const [items, setItems] = useState(['사과']);
+const addItem = () => {
+  setItems([...items, '바나나']); // 새로운 배열을 반환
+};
+```
+
+#### 2. 상태 업데이트는 비동기적으로 동작
+setCount를 호출했다고 해서 그 즉시 count의 값이 변경되지는 않아요. React는 여러 상태 업데이트를 모아서 한 번에 처리해 성능을 최적화합니다.
+
+JavaScript
+
+const [count, setCount] = useState(0);
+
+const handleButtonClick = () => {
+  setCount(count + 1);
+  console.log(count); // ⚠️ 여기서는 여전히 이전 상태값인 0이 출력될 수 있습니다!
+};
+만약 상태가 업데이트된 직후의 값을 사용해야 한다면, useEffect 훅을 사용하거나 다음 규칙을 따라야 합니다.
+
+③ 함수형 업데이트(Functional Update)를 사용해야 합니다.
+이전 상태 값에 기반하여 새로운 상태 값을 계산해야 할 때 유용합니다.
+setCount 함수에 (이전 상태) => (새로운 상태) 형태의 콜백 함수를 전달하면 됩니다.
+
+JavaScript
+
+const [count, setCount] = useState(0);
+
+const handleButtonClick = () => {
+  // 이전 상태(prevCount)를 인자로 받아 새로운 상태를 반환합니다.
+  setCount(prevCount => prevCount + 1);
+};
+
+// 버튼을 연달아 2번 눌러도 정확하게 +2가 됩니다.
+// setCount(count + 1); setCount(count + 1); (❌) 와는 다릅니다.
+함수형 업데이트는 React가 이전 상태를 보장해 주기 때문에, 연속적으로 상태를 업데이트하거나 복잡한 로직을 처리할 때 매우 안전하고 신뢰할 수 있는 방법입니다. 현업에서는 복잡한 상태를 다룰 때 필수적으로 사용됩니다.
