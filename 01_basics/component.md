@@ -21,14 +21,14 @@ function Welcome(props) {
 - JSX 반환은 하나의 값이어야 함. 불필요한 래퍼 대신 Fragment(`<>...</>`)나 배열 반환도 가능(React 16+)
 
 ### 컴포넌트의 종류
-1. 함수형 컴포넌트(Function Component)
+**1. 함수형 컴포넌트(Function Component)**
 - 현재 React에서 표준
 - 단순하고 가벼움
 - 그냥 JS 함수
 - props를 받아서 JSX를 return
 - Hook(useState, useEffect) 사용 가능
 
-2. 클래스형 컴포넌트 (Class Component)
+**2. 클래스형 컴포넌트 (Class Component)**
 - React 옛날 버전에서 주로 사용
 - 상태 관리와 생명주기 메서드 지원
 - class 문법으로 작성
