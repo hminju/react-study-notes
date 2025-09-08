@@ -6,7 +6,7 @@ Props: 부모가 자식에게 주는 선물, State: 컴포넌트 자신이 스�
 금고의 내용물(데이터)이 바뀌면, 리액트는 컴포넌트를 리렌더링해서 화면을 업데이트함.
 
 ### 1. useState 사용법
-useSate: 함수 컴포넌트에서 상태를 관리하기 위해 리액트에서 제공하는 훅
+useState: 함수 컴포넌트에서 상태를 관리하기 위해 리액트에서 제공하는 훅
 ```js
 import React, { useState } from 'react';
 
@@ -51,31 +51,34 @@ const addItem = () => {
 ```
 
 #### 2. 상태 업데이트는 비동기적으로 동작
-setCount를 호출했다고 해서 그 즉시 count의 값이 변경되지는 않아요. React는 여러 상태 업데이트를 모아서 한 번에 처리해 성능을 최적화합니다.
+setCount를 호출했다고 해서 그 즉시 count의 값이 변경되지는 않음.<br>
+React는 여러 상태 업데이트를 모아서 한 번에 처리해 성능을 최적화<br>
 
-JavaScript
-
+```js
 const [count, setCount] = useState(0);
 
 const handleButtonClick = () => {
   setCount(count + 1);
-  console.log(count); // ⚠️ 여기서는 여전히 이전 상태값인 0이 출력될 수 있습니다!
+  console.log(count); // ⚠ 여기서는 여전히 이전 상태값인 0이 출력될 수 있음
 };
-만약 상태가 업데이트된 직후의 값을 사용해야 한다면, useEffect 훅을 사용하거나 다음 규칙을 따라야 합니다.
+```
+만약 상태가 업데이트된 직후의 값을 사용해야 한다면, useEffect 훅을 사용하거나 다음 규칙을 따라야 함.
 
-③ 함수형 업데이트(Functional Update)를 사용해야 합니다.
-이전 상태 값에 기반하여 새로운 상태 값을 계산해야 할 때 유용합니다.
-setCount 함수에 (이전 상태) => (새로운 상태) 형태의 콜백 함수를 전달하면 됩니다.
+#### 3. 함수형 업데이트(Functional Update)를 사용해야 합니다.
+이전 상태 값에 기반하여 새로운 상태 값을 계산해야 할 때 유용함.<br>
+setCount 함수에 (이전 상태) => (새로운 상태) 형태의 콜백 함수를 전달<br>
 
-JavaScript
-
+```js
 const [count, setCount] = useState(0);
 
 const handleButtonClick = () => {
-  // 이전 상태(prevCount)를 인자로 받아 새로운 상태를 반환합니다.
+  // 이전 상태(prevCount)를 인자로 받아 새로운 상태를 반환
+  // 여기서는 prevCount라는 진짜 최신 값을 리액트가 넣어줌
   setCount(prevCount => prevCount + 1);
 };
-
+```
 // 버튼을 연달아 2번 눌러도 정확하게 +2가 됩니다.
-// setCount(count + 1); setCount(count + 1); (❌) 와는 다릅니다.
-함수형 업데이트는 React가 이전 상태를 보장해 주기 때문에, 연속적으로 상태를 업데이트하거나 복잡한 로직을 처리할 때 매우 안전하고 신뢰할 수 있는 방법입니다. 현업에서는 복잡한 상태를 다룰 때 필수적으로 사용됩니다.
+<br>
+
+함수형 업데이트는 React가 이전 상태를 보장해 주기 때문에, 연속적으로 상태를 업데이트하거나 복잡한 로직을 처리할 때 매우 안전하고 신뢰할 수 있는 방법<br>
+현업에서는 복잡한 상태를 다룰 때 필수적으로 사용됨.
