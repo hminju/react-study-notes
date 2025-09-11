@@ -116,7 +116,7 @@ function Counter() {
 `setCount(count + 1)` : 현재 렌더링 시점의 count 값에 의존
 `setCount(prev => prev + 1)` : 항상 최신값 기준으로 업데이트 (안전) 
 
-#### 🍀 실무에서 자주 나오는 onClick 관련 이슈
+### 🍀 실무에서 자주 나오는 onClick 관련 이슈
 #### 1.버튼 기본 동작 막기
 `<button>`은 기본적으로 form 안에 있으면 submit 이벤트를 발생시킴, 원하지 않으면 type="button" 붙이기
 ```jsx
@@ -145,7 +145,7 @@ function Form() {
   const [text, setText] = React.useState("");
 
   const handleChange = (e) => {
-    setText(e.target.value);
+    setText(e.target.value);   //입력값을 상태로 업데이트
   };
 
   return (
@@ -156,9 +156,57 @@ function Form() {
   );
 }
 ```
-- **Controlled Component** : 상태(text)가 input의 value를 직접 제어
+- `onChange`: 입력값이 바뀔 때마다 실행되는 이벤트
+- `e.target.value`: 사용자가 입력한 실제 값
+- `setText(...)`: 그 값을 상태(state)에 저장
+   -> 이렇게 하면 React가 input 값을 완전히 관리하게 됨 = Controlled Component
+<br>
+
+**Controlled Component** : 상태(text)가 input의 value를 직접 제어
 - defaultValue를 쓰면 Uncontrolled Component -> 상태를 관리하지 않고 DOM 자체가 값 관리
 
+
+### 🍀 실무에서 자주 쓰는 onChange 패턴
+#### 1.여러 input 관리
+```jsx
+const [form, setForm] = useState({ name: "", email: "" });
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setForm((prev) => ({ ...prev, [name]: value }));
+};
+
+<input name="name" value={form.name} onChange={handleChange} />
+<input name="email" value={form.email} onChange={handleChange} />
+```
+- 1개 핸들러로 여러 필드 관리 가능
+
+#### 2. 숫자만 입력받기
+```jsx
+const handleChange = (e) => {
+  const value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 남기기
+  setText(value);
+};
+```
+- 이렇게 제어할 수 있는 건 Controlled Component 덕분
+
+#### 3. 실시간 검증
+```jsx
+<input
+  value={text}
+  onChange={(e) => {
+    if (e.target.value.length <= 10) setText(e.target.value);
+  }}
+/>
+```
+- 글자수 제한도 간단히 가능
+
+
+#### ✨ 정리
+- `onChange` = 입력값 변할 때 실행
+- Controlled 방식: React가 value 직접 관리
+
+---
 ### 5. 이벤트 전파(Propagation)
 이벤트는 기본적으로 버블링됨.<br>
 필요에 따라 전파를 막거나 기본 동작을 막을 수 있음
