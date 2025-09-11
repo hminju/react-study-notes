@@ -5,12 +5,12 @@ React 공부 내용을 정리한 문서와 예제 코드 모음
 ├── README.md               # 레포 소개 및 목차
 ├── 01_basics/              # 기본 개념 (JSX, 컴포넌트, props, state 등)
 │   ├── notes.md
-│   ├── dom.md                 # 기본 개념 (JSX, 컴포넌트, props, state 등)
-│   ├── jsx.md                 # JSX 기본 문법 + Babel 변환 예시
-│   ├── component.md           # 함수형 vs 클래스형 컴포넌트 간단 비교
-│   ├── props.md               # props 기본 전달, 구조분해, defaultProps
-│   ├── state.md               # useState 사용법, 상태 업데이트 규칙
-│   └── event-handling.md      # onClick, onChange 예시, synthetic event 특징
+│   ├── dom.md                         # 기본 개념 (JSX, 컴포넌트, props, state 등)
+│   ├── jsx.md                         # JSX 기본 문법 + Babel 변환 예시
+│   ├── component.md                   # 함수형 vs 클래스형 컴포넌트 간단 비교
+│   ├── props.md                       # props 기본 전달, 구조분해, defaultProps
+│   ├── state.md                       # useState 사용법, 상태 업데이트 규칙
+│   └── event-handling.md              # onClick, onChange 예시, synthetic event 특징
 │       
 ├── 02_hooks/               # Hooks 정리 (useState, useEffect, etc.)
 │   ├── notes.md
