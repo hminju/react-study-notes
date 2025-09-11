@@ -91,7 +91,8 @@ React 17부터는 풀링 제거 -> 비동기에서도 안전하게 사용 가능
 
 ---
 ### 3.onClick 예시
-- 참고: useState란 함수형 컴포넌트에서 상태(state)를 보관하고 업데이트하게 해주는 리액트 훅으로, 호출하면 [state, setState] 쌍을 반환
+- 참고: useState: 함수형 컴포넌트에서 상태(state)를 보관하고 업데이트하게 해주는 리액트 훅 <br>
+호출하면 [state, setState] 쌍을 반환
 ```js
 import React, { useState } from "react";
 
@@ -107,8 +108,36 @@ function Counter() {
 }
 ```
 - 화살표 함수로 직접 전달 가능 `onClick={() => setCount(count+1)}`
+    - 짧고 간단할 때 유용, 하지만 렌더링마다 함수가 새로 만들어짐(성능 이슈)
 - 또는 핸들러 함수 별도로 분리 `onClick={handleClick}`
+    - 핸들러를 따로 정의해두면, 컴포넌트가 커졌을 때 코드 깔끔하고 성능 최적화에도 유리
 
+#### 상태 업데이트 시 주의점
+`setCount(count + 1)` : 현재 렌더링 시점의 count 값에 의존
+`setCount(prev => prev + 1)` : 항상 최신값 기준으로 업데이트 (안전) 
+
+#### 🍀 실무에서 자주 나오는 onClick 관련 이슈
+#### 1.버튼 기본 동작 막기
+`<button>`은 기본적으로 form 안에 있으면 submit 이벤트를 발생시킴, 원하지 않으면 type="button" 붙이기
+```jsx
+<button type="button" onClick={handleClick}>Click</button>
+```
+#### 2.이벤트 중복 발생 방지
+중복 클릭 -> 중복 API 호출 <br>
+방법: disabled 상태 주거나, 클릭 시 즉시 비활성화 처리
+#### 3.키보드 접근성
+`onClick`만 쓰면 마우스 전용<br>
+접근성을 위해 `<button>`태그를 쓰면 키보드(Enter/Space) 자동 지원됨<br>
+<div onClick={...}> 같은 건 지양 → 꼭 aria 속성, role 추가 필요
+
+#### ✨ 정리
+- onClick={함수참조} vs onClick={() => 실행} → 실행 타이밍 다름
+- setState(prev => prev + 1) 패턴이 안전
+- form 안 버튼은 type="button" 필수
+- 중복 클릭 방지, 비동기 핸들링 고려
+- 접근성까지 챙기려면 <button> 태그 적극 활용
+
+---
 ### 4. onChange 예시
 input, textarea, select 등은 onChange로 상태 관리
 ```jsx
@@ -150,3 +179,6 @@ function App() {
 ```
 - event.stopPropagation() : 이벤트 전파 중단
 
+#### event.target vs event.currentTarget : 내가 누른 것 vs 내가 걸어둔 것
+`event.target`: 진짜로 클릭된 곳, 예를 들어 버튼 안에 있는 `<p>` 태그를 클릭했다면, target은 `<p>`가 된다. 
+`event.currentTarget`: 이벤트 핸들러를 걸어둔 곳, 버튼에 onClick을 걸어두었으면 currentTarget은 항상 `<button>`이 된다.
