@@ -34,8 +34,8 @@ class Counter extends React.Component {
   }
 }
 ```
-- 코드가 길고, this.state, this.setState 같은 문법이 복잡함
-근데 Hooks가 등장하면서, 함수형 컴포넌트에서도 상태와 라이프사이클을 다룰 수 있게 됨.
+- 코드가 길고, this.state, this.setState 같은 문법이 복잡함 <br>
+근데 <mark>Hooks가 등장</mark>하면서, 함수형 컴포넌트에서도 상태와 라이프사이클을 다룰 수 있게 됨.
 ```jsx
 function Counter() {
   const [count, setCount] = React.useState(0);
