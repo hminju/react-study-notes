@@ -162,7 +162,7 @@ function Form() {
    -> 이렇게 하면 React가 input 값을 완전히 관리하게 됨 = Controlled Component
 <br>
 
-**Controlled Component** : 상태(text)가 input의 value를 직접 제어
+<mark>**Controlled Component**</mark> : 상태(text)가 input의 value를 직접 제어
 - defaultValue를 쓰면 Uncontrolled Component -> 상태를 관리하지 않고 DOM 자체가 값 관리
 
 
@@ -208,8 +208,13 @@ const handleChange = (e) => {
 
 ---
 ### 5. 이벤트 전파(Propagation)
+#### 5-1. 기본 개념
 이벤트는 기본적으로 버블링됨.<br>
-필요에 따라 전파를 막거나 기본 동작을 막을 수 있음
+즉, 자식 → 부모 → 더 상위 부모 → document 이런시긍로 점점 위로 올라가면서 실행됨.
+필요에 따라 전파를 막거나 기본 동작을 막을 수 있음 (ex. 부모까지 전달되면 안되는 경우 `e.stopPropagation()` 을 씀)
+#### 5-2. 전파 막기
+- event.stopPropagation() : 이벤트 전파 중단
+
 ```js
 function App() {
   const handleParent = () => console.log("부모 div 클릭됨");
@@ -224,9 +229,48 @@ function App() {
     </div>
   );
 }
+
+//로그
+//자식 버튼 클릭됨
 ```
-- event.stopPropagation() : 이벤트 전파 중단
+#### 5-3. 기본 동작 막기
+버튼 클릭하면 `form`이 submit 되는 것처럼, 브라우저가 자동으로 하는 동작이 있음. 이걸 막으려면 `e.preventDefault()` 사용
+```jsx
+function Form() {
+  const handleSubmit = (e) => {
+    e.preventDefault(); // 새로고침 방지
+    console.log("폼 제출!");
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <button type="submit">제출</button>
+    </form>
+  );
+}
+```
 
 #### event.target vs event.currentTarget : 내가 누른 것 vs 내가 걸어둔 것
 `event.target`: 진짜로 클릭된 곳, 예를 들어 버튼 안에 있는 `<p>` 태그를 클릭했다면, target은 `<p>`가 된다. 
 `event.currentTarget`: 이벤트 핸들러를 걸어둔 곳, 버튼에 onClick을 걸어두었으면 currentTarget은 항상 `<button>`이 된다.
+- target: 내가 정말로 누른 요소
+- currentTarget: 이벤트 핸들러가 달려 있는 요소(누가 듣고 있었는지)
+```jsx
+function App() {
+  const handleParent = (e) => {
+    console.log("target:", e.target);       // 실제 클릭된 요소
+    console.log("currentTarget:", e.currentTarget); // 이벤트 핸들러 걸린 요소
+  };
+
+  return (
+    <div onClick={handleParent}>
+      <button>버튼</button>
+    </div>
+  );
+}
+```
+#### ✨ 정리
+- 이벤트는 기본적으로 자식 → 부모 → 최상위로 올라감 (버블링)
+- stopPropagation() : 전파 막음
+- preventDefault() : 브라우저 기본 동작 막음 (ex. 새로고침, 링크 이동)
+- target vs currentTarget → “누른 애” vs “이벤트 달린 애”
