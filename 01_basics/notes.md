@@ -7,7 +7,7 @@
 - [이벤트 처리](./event-handling.md) onClick, onChange 예시, synthetic event 특징.
 - [조건부/리스트 렌더링](./rendering.md) 조건부 렌더링 (&&, 삼항연산자), 리스트 렌더링, key 중요성.
 
-## 0. React
+## React
 
 ### React 이름
 
@@ -27,6 +27,7 @@
 4. 단방향 데이터 흐름
    - 데이터는 부모->자식으로 흘러간다.(props)
    - 앱의 상태 관리가 직관적이고 예측 가능
+
 
 
 
