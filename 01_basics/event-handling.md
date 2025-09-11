@@ -10,7 +10,7 @@ React에서 이벤트는 camelCase로 작성<br>
 // 올바른 예시 (React)
 <button onClick={handleClick}>Click Me</button>
 ```
-#### 함수 호출 vs 함수 참조
+#### <mark>함수 호출 vs 함수 참조</mark>
 - handleClick → 함수 그 자체 (참조)
 - handleClick() → 함수를 지금 즉시 실행하고 반환값을 가져옴
 
@@ -71,7 +71,7 @@ React는 모든 이벤트 리스너를 진짜 DOM에 다 달지 않음<br>
 대신 **루트에 한 번만 달아두고**, 이벤트가 발생하면 React 내부에서 "누가 눌렀는지"를 찾아서 핸들러 실행<br>
 -> 이렇게 하면 성능도 좋아지고 메모리도 절약!
 
-#### 2-4.풀링(Pooling)
+#### <mark>2-4.풀링(Pooling)</mark>
 **pool**: 자원을 미리 만들어두고 재사용하는 저장소 (핵심: 매번 새로 만드면 비싸니까, 만들어둔 걸 돌려쓰자) <br>
 
 **예전 방식 React(17이전)** : 이벤트 객체를 재활용하려고 pool에 넣었다가 다시 꺼내 쓰는 방식<br>
