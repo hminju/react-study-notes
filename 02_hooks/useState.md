@@ -41,6 +41,7 @@ setCount(prev => prev + 1);
 초기값 계산 비용이 클 경우, 함수 형태로 전달하면 처음 렌더링 시에만 실행된다.
 ```jsx
 const [value, setValue] = useState(() => heavyCalculation());
+//참고: useState(heavyCalculation()) 이렇게 하면 컴포넌트가 렌더링될때마다 함수 실행됨
 ```
 #### (4) 불변성 유지
 - 상태를 직접 수정하면 React가 변화 감지 못함.
