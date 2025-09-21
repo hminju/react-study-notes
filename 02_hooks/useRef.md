@@ -47,4 +47,75 @@ function InputFocus() {
 ```
 - 여기서 `inputRef.current`는 실제 `<input>` DOM 노드를 가리킴
 - 실무에서는 로그인 폼, 검색창, 모달창에서 자동 포커싱할 때 자주 씀
-- 
+
+---
+#### 3-2. 값 저장소로 사용(렌더링에 영향 없음)
+`useState`랑 달리, 값이 변해도 렌더링이 발생하지 않아 주로 **렌더링과 무관하게 계속 유지해야 하는 값**을 저장할 때 사용
+```jsx
+import { useRef, useState } from "react";
+
+function Timer() {
+  const [count, setCount] = useState(0);
+  const intervalRef = useRef(null);
+
+  const startTimer = () => {
+    if (intervalRef.current) return; // 중복 실행 방지
+    intervalRef.current = setInterval(() => {
+      setCount((prev) => prev + 1);
+    }, 1000);
+  };
+
+  const stopTimer = () => {
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+  };
+
+  return (
+    <div>
+      <p>시간: {count}</p>
+      <button onClick={startTimer}>시작</button>
+      <button onClick={stopTimer}>중지</button>
+    </div>
+  );
+}
+```
+- `intervalRef.current`는 값이 변해도 컴포넌트를 다시 그리지 않음
+- 즉 렌더링과 상관 없는 데이터(타이머ID, 외부 라이브러리 인스턴스) 등을 저장할 때 유용
+
+---
+#### 3-3. 이전 값 기억하기
+렌더링 사이에서 이전 상태를 기억하고 싶을 때 사용 가능
+```jsx
+import { useEffect, useRef, useState } from "react";
+
+function PreviousValue() {
+  const [value, setValue] = useState("");
+  const prevValue = useRef("");
+
+  useEffect(() => {
+    prevValue.current = value; // 렌더링 끝나고 값 저장
+  }, [value]);
+
+  return (
+    <div>
+      <input value={value} onChange={(e) => setValue(e.target.value)} />
+      <p>현재 값: {value}</p>
+      <p>이전 값: {prevValue.current}</p>
+    </div>
+  );
+}
+```
+- 이렇게 하면 매번 리렌더링될 때 이전 값 추적 가능
+- 실무에서 폼 입력 변화 추적, 애니메이션 상태 비교 등에 쓰임
+
+---
+### 4. 팁
+1. 포커스 제어: 검색창 자동 포커싱, 에러 발생 시 input focus 등
+2. 외부 라이브러리 인스턴스 보관
+3. 드래그 앤 드롭 좌표 저장: 렌더링할 필요 없는 마우스 좌표 관리
+
+---
+### ✨ 정리
+1. `useRef`는 리렌더링 없이 값 유지 + DOM 접근을 가능하게 하는 훅
+2. `useState`와 다르게 값이 바뀌어도 화면은 다시 그려지지 않음
+3. 실무에서는 포커스 제어, 타이머, 외부 라이브러리 객체 관리 등에서 자주 사용
